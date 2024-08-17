@@ -2,6 +2,9 @@ package com.bloomtech.socialfeed.validators;
 
 import com.bloomtech.socialfeed.exceptions.EmailValidationException;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class EmailValidator implements Validator {
     public EmailValidator() {
     }
@@ -10,8 +13,8 @@ public class EmailValidator implements Validator {
         /*TODO: Validate that email begins with a letter or number, contains only letters, numbers, "." and "_", and
         *that it follows the pattern of name@domain.identifier
         */
-
-        return true;
+        String emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z]+\\.[A-Za-z]{2,}$";
+        return Pattern.matches(emailRegex, email);
     }
 
     @Override

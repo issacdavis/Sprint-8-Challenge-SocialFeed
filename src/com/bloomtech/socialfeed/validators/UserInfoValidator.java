@@ -4,18 +4,28 @@ import com.bloomtech.socialfeed.exceptions.UserValidationException;
 import com.bloomtech.socialfeed.models.Role;
 import com.bloomtech.socialfeed.models.User;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class UserInfoValidator implements Validator {
 
     private boolean isValidUsername(String username) {
         //TODO: validate username begins with an uppercase letter, is at least 4 characters long, and only contains
         //letters, numbers, and underscores
-        return true;
+        Pattern regexUsername = Pattern.compile("^[A-Z][a-zA-Z0-9]{3,}$");
+        Matcher matchUsername = regexUsername.matcher(username);
+        return matchUsername.matches();
+
     }
 
     private boolean isValidPassword(String password) {
         //TODO: validate password contains at least 8 characters, an uppercase, and a lowercase letter.
         //valid symbols include: !@#$%^&*
-        return true;
+        String passwordRegex = "^(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d!@#$%^&*]{8,}$";
+        Pattern pattern = Pattern.compile(passwordRegex);
+        Matcher m = pattern.matcher(password);
+
+        return m.matches();
     }
 
     @Override
